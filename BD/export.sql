@@ -1,0 +1,51 @@
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+
+DROP DATABASE IF EXISTS `examen_finca`;
+CREATE DATABASE IF NOT EXISTS `examen_finca` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `examen_finca`;
+
+
+DROP TABLE IF EXISTS `TProductores`;
+CREATE TABLE IF NOT EXISTS `TProductores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cedula` varchar(100) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `empresa` varchar(100) NOT NULL,
+  `provincia` varchar(100) NOT NULL,
+  `canton` varchar(100) NOT NULL,
+  `distrito` varchar(100) NOT NULL,
+  `direccion_nominal` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `TFincas`;
+CREATE TABLE IF NOT EXISTS `TFincas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_productor` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_productor) REFERENCES TProductores(id)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `TCafes`;
+CREATE TABLE IF NOT EXISTS `TCafes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_finca` int(11) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (id_finca) REFERENCES TFincas(id)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
